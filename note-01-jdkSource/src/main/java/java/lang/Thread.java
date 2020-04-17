@@ -1158,6 +1158,7 @@ class Thread implements Runnable {
      * thread's {@linkplain java.lang.ThreadGroup thread group} and its
      * subgroups. Recursively iterates over all subgroups in the current
      * thread's thread group.
+     * 返回当前线程组及其子线程组(通过递归遍历)中预估存活线程数量
      *
      * <p> The value returned is only an estimate because the number of
      * threads may change dynamically while this method traverses internal
@@ -1709,7 +1710,7 @@ class Thread implements Runnable {
      * A thread state.  A thread can be in one of the following states:
      * <ul>
      * <li>{@link #NEW}<br>
-     *     A thread that has not yet started is in this state.
+     *     a thread that has not yet started is in this state.
      *     </li>
      * <li>{@link #RUNNABLE}<br>
      *     A thread executing in the Java virtual machine is in this state.
