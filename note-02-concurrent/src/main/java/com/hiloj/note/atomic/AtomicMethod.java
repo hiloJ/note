@@ -3,7 +3,18 @@ package com.hiloj.note.atomic;
 import java.util.concurrent.atomic.*;
 
 /**
- *  原子类
+ *  原子类型，可以划分为5类：
+ *   1. 普通原子类型
+ *      Atomic[Boolean/Integer/Long/Reference]
+ *   2. 原子类型数组
+ *      Atomic[LongArray/IntegerArray/ReferenceArray]
+ *   3. 原子类型字段更新器
+ *      Atomic[LongFieldUpdater/IntegerFieldUpdater/ReferenceFieldUpdater]
+ *   4. 带版本号的原子引用类型
+ *      Atomic[StampedReference/MarkableReference]
+ *   5. 原子累加器
+ *      Double[Accumulator/Adder]
+ *      Long[Accumulator/Adder]
  */
 public class AtomicMethod {
     public static void main(String[] args) {
