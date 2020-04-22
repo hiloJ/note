@@ -1,4 +1,4 @@
-package com.hiloj.note.keywords;
+package com.hiloj.note.key_words;
 
 import java.util.concurrent.TimeUnit;
 

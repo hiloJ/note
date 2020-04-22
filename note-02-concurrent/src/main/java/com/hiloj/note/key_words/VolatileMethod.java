@@ -1,4 +1,4 @@
-package com.hiloj.note.keywords;
+package com.hiloj.note.key_words;
 
 /**
  * Volatile关键字保证可见性及有序性，不保证原子性
