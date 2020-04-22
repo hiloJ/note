@@ -12,7 +12,9 @@ import java.util.concurrent.TimeUnit;
  *  线程优先级：thread.getPriority()
  *  线程是否存活：thread.isAlive()
  *  线程是否守护线程：thread.isDaemon()
- *  线程是否中断：thread.isInterrupted()
+ *  中断线程：thread.interrupt()
+ *  线程是否中断，清除中断标志位：Thread.interrupted()
+ *  线程是否中断，不清除中断标志位：thread.isInterrupted()
  *  线程插队：thread.join()
  */
 public class ThreadMethod {
@@ -21,7 +23,36 @@ public class ThreadMethod {
         // BaseMethod();
         // 线程插队
         // threadJoin();
-        threadDeamon();
+        // 守护线程
+        // threadDeamon();
+        threadInterrupt();
+    }
+
+    // 线程中断
+    private static void threadInterrupt() {
+        new Thread(()->{
+            for (int i = 0; i < 4; i++) {
+                if (i == 1) {
+                    // 当前线程中断
+                    Thread.currentThread().interrupt();
+                    System.out.println("线程【" + Thread.currentThread().getName() + "】\t 调用了interrupt()");
+                }
+                System.out.println("线程【" + Thread.currentThread().getName() + "】\t 当前值为：" + i);
+                System.out.println("线程【" + Thread.currentThread().getName() + "】\t Thread.interrupted()为：" + Thread.interrupted());
+            }
+        },"Thread-A").start();
+
+        new Thread(()->{
+            for (int i = 0; i < 4; i++) {
+                if (i == 1) {
+                    // 当前线程中断
+                    Thread.currentThread().interrupt();
+                    System.out.println("线程【" + Thread.currentThread().getName() + "】\t 调用了interrupt()");
+                }
+                System.out.println("线程【" + Thread.currentThread().getName() + "】\t 当前值为：" + i);
+                System.out.println("线程【" + Thread.currentThread().getName() + "】\t Thread.currentThread().isInterrupted()为：" + Thread.currentThread().isInterrupted());
+            }
+        },"Thread-B").start();
     }
 
     // 设置守护线程
