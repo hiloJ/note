@@ -1,25 +1,25 @@
 package com.hiloj.note.cyclicbarrier;
 
-import org.apache.commons.lang3.RandomUtils;
-
 import java.util.Arrays;
+import java.util.Random;
 import java.util.concurrent.*;
 
 /**
  *  案例：多线程分组计算
- *  详细：有一个大小为5千万的随机数组，用5个线程分别计算1千万个元素的和，合并计算得出最后的结果
+ *  详细：有一个大小为5百万的随机数组，用5个线程分别计算1百万个元素的和，合并计算得出最后的结果
  */
 public class CyclicBarrierMethod4 {
     public static void main(String[] args) {
         // 指定数组容量
-        int size = 50000000;
+        int size = 5000000;
 
         // 数组定义
         int[] nums = new int[size];
 
         // 添加随机数
+        Random random = new Random();
         for (int i = 0; i < size; i++) {
-            nums[i] = RandomUtils.nextInt(100,1000);
+            nums[i] = random.nextInt(1000);
         }
 
         // 使用单线程计算结果
