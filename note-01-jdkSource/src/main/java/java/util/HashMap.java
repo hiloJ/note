@@ -284,9 +284,13 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      * hashMap的节点结构
      */
     static class Node<K,V> implements Map.Entry<K,V> {
+        // key的hash值
         final int hash;
+        // 保存的key值
         final K key;
+        // 保存的value值
         V value;
+        // 单链表，保存下一个节点的引用
         Node<K,V> next;
 
         Node(int hash, K key, V value, Node<K,V> next) {
@@ -549,16 +553,14 @@ public class HashMap<K,V> extends AbstractMap<K,V>
         if (s > 0) {
             // 节点table没有初始化
             if (table == null) { // pre-size
-                // 按照传入map的大小计算哈希表下次扩容的大小
+                // 按照传入map的大小向上取整计算容器大小
                 float ft = ((float)s / loadFactor) + 1.0F;
                 int t = ((ft < (float)MAXIMUM_CAPACITY) ?
                          (int)ft : MAXIMUM_CAPACITY);
                 if (t > threshold)
                     threshold = tableSizeFor(t);
             }
-            // 节点table已经初始化
-            else if (s > threshold)
-                // 传入map的大小大于下次扩容的大小，触发table扩容
+            else if (s > threshold) // 传入的map容量大于当前容器的容量,触发扩容
                 resize();
             // 对map进行遍历，调用putVal方法将map中的键值存放到哈希表中
             for (Map.Entry<? extends K, ? extends V> e : m.entrySet()) {
@@ -605,7 +607,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      * @see #put(Object, Object)
      */
     public V get(Object key) {
-        Node<K,V> e;
+        Node<K,V> e;    // 保存查找到的节点数据
         return (e = getNode(hash(key), key)) == null ? null : e.value;
     }
 
@@ -617,15 +619,25 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      * @return the node, or null if none
      */
     final Node<K,V> getNode(int hash, Object key) {
+        // tab:指向底层数组
+        // first: 存储头节点数据
+        // e: 临时变量,遍历过程中使用
+        // n: 数组长度
+        // k: 节点的key值
         Node<K,V>[] tab; Node<K,V> first, e; int n; K k;
+        // 容器中有元素且对应位置有元素
         if ((tab = table) != null && (n = tab.length) > 0 &&
             (first = tab[(n - 1) & hash]) != null) {
+            // 判断头节点是否符合要求
             if (first.hash == hash && // always check first node
                 ((k = first.key) == key || (key != null && key.equals(k))))
                 return first;
+            // 头节点不符合要求，遍历查找
             if ((e = first.next) != null) {
+                // 判断是否红黑树，是，按照红黑树遍历查找
                 if (first instanceof TreeNode)
                     return ((TreeNode<K,V>)first).getTreeNode(hash, key);
+                // 不是红黑树，按照链表遍历查找
                 do {
                     if (e.hash == hash &&
                         ((k = e.key) == key || (key != null && key.equals(k))))
@@ -1883,10 +1895,15 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      * linked node.
      */
     static final class TreeNode<K,V> extends LinkedHashMap.Entry<K,V> {
+        // 父节点
         TreeNode<K,V> parent;  // red-black tree links
+        // 左节点
         TreeNode<K,V> left;
+        // 右节点
         TreeNode<K,V> right;
+        // 前一个节点
         TreeNode<K,V> prev;    // needed to unlink next upon deletion
+        // 是否是红色节点
         boolean red;
         TreeNode(int hash, K key, V val, Node<K,V> next) {
             super(hash, key, val, next);
