@@ -25,33 +25,28 @@
 
 package com.sun.java.swing.plaf.gtk;
 
-import sun.awt.UNIXToolkit;
-import com.sun.java.swing.plaf.gtk.GTKConstants.PositionType;
-import com.sun.java.swing.plaf.gtk.GTKConstants.StateType;
-import sun.awt.OSInfo;
-import sun.awt.SunToolkit;
-import sun.security.action.GetPropertyAction;
-import sun.swing.DefaultLayoutStyle;
-import sun.swing.SwingUtilities2;
-
-import javax.swing.*;
-import javax.swing.colorchooser.AbstractColorChooserPanel;
-import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.DimensionUIResource;
-import javax.swing.plaf.InsetsUIResource;
-import javax.swing.plaf.synth.Region;
-import javax.swing.plaf.synth.SynthConstants;
-import javax.swing.plaf.synth.SynthLookAndFeel;
-import javax.swing.text.DefaultEditorKit;
 import java.awt.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.awt.event.*;
+import java.beans.*;
 import java.io.File;
-import java.lang.ref.ReferenceQueue;
-import java.lang.ref.WeakReference;
+import java.lang.ref.*;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.Locale;
+import javax.swing.*;
+import javax.swing.colorchooser.*;
+import javax.swing.plaf.*;
+import javax.swing.plaf.synth.*;
+import javax.swing.text.DefaultEditorKit;
+
+import com.sun.java.swing.plaf.gtk.GTKConstants.PositionType;
+import com.sun.java.swing.plaf.gtk.GTKConstants.StateType;
+import sun.awt.SunToolkit;
+import sun.awt.UNIXToolkit;
+import sun.awt.OSInfo;
+import sun.security.action.GetPropertyAction;
+import sun.swing.DefaultLayoutStyle;
+import sun.swing.SwingUtilities2;
 
 /**
  * @author Scott Violet

@@ -25,14 +25,17 @@
 package com.sun.java.swing.plaf.gtk;
 
 import sun.awt.UNIXToolkit;
-import com.sun.java.swing.plaf.gtk.GTKConstants.*;
 
-import javax.swing.*;
-import javax.swing.border.AbstractBorder;
-import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.UIResource;
 import javax.swing.plaf.synth.*;
 import java.awt.*;
+import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.plaf.*;
+import com.sun.java.swing.plaf.gtk.GTKConstants.ArrowType;
+import com.sun.java.swing.plaf.gtk.GTKConstants.ExpanderStyle;
+import com.sun.java.swing.plaf.gtk.GTKConstants.Orientation;
+import com.sun.java.swing.plaf.gtk.GTKConstants.PositionType;
+import com.sun.java.swing.plaf.gtk.GTKConstants.ShadowType;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 

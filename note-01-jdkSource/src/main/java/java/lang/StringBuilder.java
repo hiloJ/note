@@ -1,31 +1,126 @@
+/*
+ * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+
 package java.lang;
 
+
 /**
- * @author Michael McCloskey
- * @see java.lang.StringBuffer
- * @see java.lang.String
- * @since 1.5
+ * A mutable sequence of characters.  This class provides an API compatible
+ * with {@code StringBuffer}, but with no guarantee of synchronization.
+ * This class is designed for use as a drop-in replacement for
+ * {@code StringBuffer} in places where the string buffer was being
+ * used by a single thread (as is generally the case).   Where possible,
+ * it is recommended that this class be used in preference to
+ * {@code StringBuffer} as it will be faster under most implementations.
+ *
+ * <p>The principal operations on a {@code StringBuilder} are the
+ * {@code append} and {@code insert} methods, which are
+ * overloaded so as to accept data of any type. Each effectively
+ * converts a given datum to a string and then appends or inserts the
+ * characters of that string to the string builder. The
+ * {@code append} method always adds these characters at the end
+ * of the builder; the {@code insert} method adds the characters at
+ * a specified point.
+ * <p>
+ * For example, if {@code z} refers to a string builder object
+ * whose current contents are "{@code start}", then
+ * the method call {@code z.append("le")} would cause the string
+ * builder to contain "{@code startle}", whereas
+ * {@code z.insert(4, "le")} would alter the string builder to
+ * contain "{@code starlet}".
+ * <p>
+ * In general, if sb refers to an instance of a {@code StringBuilder},
+ * then {@code sb.append(x)} has the same effect as
+ * {@code sb.insert(sb.length(), x)}.
+ * <p>
+ * Every string builder has a capacity. As long as the length of the
+ * character sequence contained in the string builder does not exceed
+ * the capacity, it is not necessary to allocate a new internal
+ * buffer. If the internal buffer overflows, it is automatically made larger.
+ *
+ * <p>Instances of {@code StringBuilder} are not safe for
+ * use by multiple threads. If such synchronization is required then it is
+ * recommended that {@link java.lang.StringBuffer} be used.
+ *
+ * <p>Unless otherwise noted, passing a {@code null} argument to a constructor
+ * or method in this class will cause a {@link NullPointerException} to be
+ * thrown.
+ *
+ * @author      Michael McCloskey
+ * @see         java.lang.StringBuffer
+ * @see         java.lang.String
+ * @since       1.5
  */
 public final class StringBuilder
-        extends AbstractStringBuilder
-        implements java.io.Serializable, CharSequence {
+    extends AbstractStringBuilder
+    implements java.io.Serializable, CharSequence
+{
 
-
+    /** use serialVersionUID for interoperability */
     static final long serialVersionUID = 4383685877147921099L;
 
+    /**
+     * Constructs a string builder with no characters in it and an
+     * initial capacity of 16 characters.
+     */
     public StringBuilder() {
         super(16);
     }
 
+    /**
+     * Constructs a string builder with no characters in it and an
+     * initial capacity specified by the {@code capacity} argument.
+     *
+     * @param      capacity  the initial capacity.
+     * @throws     NegativeArraySizeException  if the {@code capacity}
+     *               argument is less than {@code 0}.
+     */
     public StringBuilder(int capacity) {
         super(capacity);
     }
 
+    /**
+     * Constructs a string builder initialized to the contents of the
+     * specified string. The initial capacity of the string builder is
+     * {@code 16} plus the length of the string argument.
+     *
+     * @param   str   the initial contents of the buffer.
+     */
     public StringBuilder(String str) {
         super(str.length() + 16);
         append(str);
     }
 
+    /**
+     * Constructs a string builder that contains the same characters
+     * as the specified {@code CharSequence}. The initial capacity of
+     * the string builder is {@code 16} plus the length of the
+     * {@code CharSequence} argument.
+     *
+     * @param      seq   the sequence to copy.
+     */
     public StringBuilder(CharSequence seq) {
         this(seq.length() + 16);
         append(seq);
@@ -58,8 +153,8 @@ public final class StringBuilder
      * <i>n</i>; otherwise, it is equal to the character at index <i>k-n</i>
      * in the argument {@code sb}.
      *
-     * @param sb the {@code StringBuffer} to append.
-     * @return a reference to this object.
+     * @param   sb   the {@code StringBuffer} to append.
+     * @return  a reference to this object.
      */
     public StringBuilder append(StringBuffer sb) {
         super.append(sb);
@@ -73,7 +168,7 @@ public final class StringBuilder
     }
 
     /**
-     * @throws IndexOutOfBoundsException {@inheritDoc}
+     * @throws     IndexOutOfBoundsException {@inheritDoc}
      */
     @Override
     public StringBuilder append(CharSequence s, int start, int end) {
@@ -173,7 +268,8 @@ public final class StringBuilder
      */
     @Override
     public StringBuilder insert(int index, char[] str, int offset,
-                                int len) {
+                                int len)
+    {
         super.insert(index, str, offset, len);
         return this;
     }
@@ -183,8 +279,8 @@ public final class StringBuilder
      */
     @Override
     public StringBuilder insert(int offset, Object obj) {
-        super.insert(offset, obj);
-        return this;
+            super.insert(offset, obj);
+            return this;
     }
 
     /**
@@ -210,8 +306,8 @@ public final class StringBuilder
      */
     @Override
     public StringBuilder insert(int dstOffset, CharSequence s) {
-        super.insert(dstOffset, s);
-        return this;
+            super.insert(dstOffset, s);
+            return this;
     }
 
     /**
@@ -219,7 +315,8 @@ public final class StringBuilder
      */
     @Override
     public StringBuilder insert(int dstOffset, CharSequence s,
-                                int start, int end) {
+                                int start, int end)
+    {
         super.insert(dstOffset, s, start, end);
         return this;
     }
@@ -315,14 +412,14 @@ public final class StringBuilder
      * (that is, serialize it).
      *
      * @serialData the number of characters currently stored in the string
-     * builder ({@code int}), followed by the characters in the
-     * string builder ({@code char[]}).   The length of the
-     * {@code char} array may be greater than the number of
-     * characters currently stored in the string builder, in which
-     * case extra characters are ignored.
+     *             builder ({@code int}), followed by the characters in the
+     *             string builder ({@code char[]}).   The length of the
+     *             {@code char} array may be greater than the number of
+     *             characters currently stored in the string builder, in which
+     *             case extra characters are ignored.
      */
     private void writeObject(java.io.ObjectOutputStream s)
-            throws java.io.IOException {
+        throws java.io.IOException {
         s.defaultWriteObject();
         s.writeInt(count);
         s.writeObject(value);
@@ -333,7 +430,7 @@ public final class StringBuilder
      * a stream.
      */
     private void readObject(java.io.ObjectInputStream s)
-            throws java.io.IOException, ClassNotFoundException {
+        throws java.io.IOException, ClassNotFoundException {
         s.defaultReadObject();
         count = s.readInt();
         value = (char[]) s.readObject();

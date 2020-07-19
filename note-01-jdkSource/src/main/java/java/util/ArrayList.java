@@ -253,7 +253,6 @@ public class ArrayList<E> extends AbstractList<E>
      *
      * @param minCapacity the desired minimum capacity
      */
-    //
     private void grow(int minCapacity) {
         // overflow-conscious code
         int oldCapacity = elementData.length;

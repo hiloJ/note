@@ -39,16 +39,12 @@ import sun.security.action.GetPropertyAction;
 
 /**
  * An abstract representation of file and directory pathnames.
- * 文件和目录路径名的抽象表示
+ *
  * <p> User interfaces and operating systems use system-dependent <em>pathname
  * strings</em> to name files and directories.  This class presents an
  * abstract, system-independent view of hierarchical pathnames.  An
  * <em>abstract pathname</em> has two components:
- * 用户界面和操作系统使用系统独立的路径字符串的文件和目录的名称
- * 此类提供了抽象的，与系统无关的分层路径名视图。
- * 一个抽象的路径有两个组成部分：
- *   ① 一个可选的系统相关的前缀，如磁盘驱动器说明符，"/" 为UNIX的根目录，或"\\\\" 为微软Windows UNC路径名
- *   ② 一个零或多个字符串的序列
+ *
  * <ol>
  * <li> An optional system-dependent <em>prefix</em> string,
  *      such as a disk-drive specifier, <code>"/"</code>&nbsp;for the UNIX root
@@ -56,17 +52,12 @@ import sun.security.action.GetPropertyAction;
  * <li> A sequence of zero or more string <em>names</em>.
  * </ol>
  *
- * 抽象路径名中的名字可以是目录名，如果是Microsoft Windows UNC路径名，则可以是主机名。
- * 抽象路径名中的每个后面的名称表示一个目录，最后一个名字可以表示目录或文件。
- * 一个空的抽象路径名没有前缀，并且名称序列为空
- *
  * The first name in an abstract pathname may be a directory name or, in the
  * case of Microsoft Windows UNC pathnames, a hostname.  Each subsequent name
  * in an abstract pathname denotes a directory; the last name may denote
  * either a directory or a file.  The <em>empty</em> abstract pathname has no
  * prefix and an empty name sequence.
  *
- * 路径字符串与抽象路径
  * <p> The conversion of a pathname string to or from an abstract pathname is
  * inherently system-dependent.  When an abstract pathname is converted into a
  * pathname string, each name is separated from the next by a single copy of

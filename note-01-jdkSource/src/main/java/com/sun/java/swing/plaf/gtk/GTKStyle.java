@@ -25,23 +25,20 @@
 
 package com.sun.java.swing.plaf.gtk;
 
-import sun.awt.UNIXToolkit;
-import com.sun.java.swing.plaf.gtk.GTKEngine.WidgetType;
+import java.awt.*;
+import java.lang.reflect.*;
+import java.security.*;
+import java.util.*;
+import javax.swing.*;
+import javax.swing.plaf.*;
+import javax.swing.plaf.synth.*;
+
 import sun.awt.AppContext;
+import sun.awt.UNIXToolkit;
 import sun.swing.SwingUtilities2;
 import sun.swing.plaf.synth.SynthIcon;
 
-import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.DimensionUIResource;
-import javax.swing.plaf.FontUIResource;
-import javax.swing.plaf.UIResource;
-import javax.swing.plaf.synth.*;
-import java.awt.*;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
+import com.sun.java.swing.plaf.gtk.GTKEngine.WidgetType;
 
 /**
  *
@@ -96,7 +93,7 @@ class GTKStyle extends SynthStyle implements GTKConstants {
         this.widgetType = widgetType.ordinal();
 
         String pangoFontName;
-        synchronized (UNIXToolkit.GTK_LOCK) {
+        synchronized (sun.awt.UNIXToolkit.GTK_LOCK) {
             xThickness = nativeGetXThickness(this.widgetType);
             yThickness = nativeGetYThickness(this.widgetType);
             pangoFontName = nativeGetPangoFontName(this.widgetType);
@@ -193,7 +190,7 @@ class GTKStyle extends SynthStyle implements GTKConstants {
                                         ColorType type)
     {
         state = GTKLookAndFeel.synthStateToGTKStateType(state).ordinal();
-        synchronized (UNIXToolkit.GTK_LOCK) {
+        synchronized (sun.awt.UNIXToolkit.GTK_LOCK) {
             int rgb = nativeGetColorForState(widgetType, state,
                                              type.getID());
             return new ColorUIResource(rgb);
@@ -308,6 +305,7 @@ class GTKStyle extends SynthStyle implements GTKConstants {
      * insets will be placed in it, otherwise a new Insets object will be
      * created and returned.
      *
+     * @param context SynthContext identifying requestor
      * @param insets Where to place Insets
      * @return Insets.
      */
@@ -634,7 +632,7 @@ class GTKStyle extends SynthStyle implements GTKConstants {
      * @return Value, or null if one has not been defined.
      */
     Object getClassSpecificValue(String key) {
-        synchronized (UNIXToolkit.GTK_LOCK) {
+        synchronized (sun.awt.UNIXToolkit.GTK_LOCK) {
             return nativeGetClassValue(widgetType, key);
         }
     }
@@ -804,7 +802,7 @@ class GTKStyle extends SynthStyle implements GTKConstants {
                 // calculations come from gtkspinbutton.c (version 2.8.20),
                 // spin_button_get_arrow_size() method.
                 String pangoFontName;
-                synchronized (UNIXToolkit.GTK_LOCK) {
+                synchronized (sun.awt.UNIXToolkit.GTK_LOCK) {
                     pangoFontName =
                         nativeGetPangoFontName(WidgetType.SPINNER.ordinal());
                 }

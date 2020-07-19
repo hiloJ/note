@@ -31,7 +31,6 @@ import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.plaf.synth.*;
 
-import sun.awt.UNIXToolkit;
 import com.sun.java.swing.plaf.gtk.GTKConstants.ArrowType;
 import com.sun.java.swing.plaf.gtk.GTKConstants.ExpanderStyle;
 import com.sun.java.swing.plaf.gtk.GTKConstants.Orientation;
@@ -613,7 +612,7 @@ class GTKEngine {
      * Notify native layer of theme change, and flush cache
      */
     public void themeChanged() {
-        synchronized(UNIXToolkit.GTK_LOCK) {
+        synchronized(sun.awt.UNIXToolkit.GTK_LOCK) {
             native_switch_theme();
         }
         cache.flush();
@@ -621,7 +620,7 @@ class GTKEngine {
 
     /* GtkSettings enum mirrors that in gtk2_interface.h */
     public Object getSetting(Settings property) {
-        synchronized(UNIXToolkit.GTK_LOCK) {
+        synchronized(sun.awt.UNIXToolkit.GTK_LOCK) {
             return native_get_gtk_setting(property.ordinal());
         }
     }
